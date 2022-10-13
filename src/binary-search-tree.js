@@ -19,6 +19,7 @@ class BinarySearchTree {
   }
 
   root() {
+    if (!this.data) return null
     return this;
 
   }
@@ -51,15 +52,20 @@ class BinarySearchTree {
   }
 
   has(node) {
+    if (!this.root()) return null;
     if (node === this.data) return true;
     if ((!this.right) && (!this.left)) return false;
-    if (node > this.data) return this.right.has(node)
-    else return this.left.has(node)
+    if ((node > this.data) && (this.right)) return this.right.has(node)
+    else if ((node < this.data) && (this.left)) return this.left.has(node)
+    return false;
   }
 
   find(node) {
-    if (this.has(node)) return node;
-    return null;
+    if (!this.has(node)) return null;
+    if (node === this.data) return this;
+
+    if (node > this.data) return this.right.find(node);
+    return this.left.find(node);
   }
 
   remove(data) {
