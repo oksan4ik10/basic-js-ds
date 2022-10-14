@@ -13,6 +13,12 @@ const { ListNode } = require('../extensions/list-node.js');
  * queue.dequeue(); // returns the top element from queue and deletes it, returns 1
  * queue.getUnderlyingList() // returns { value: 3, next: null }
  */
+ListNode.prototype.add = function (x) {
+  if (this.next) { this.next.add(x); return }
+  let newNode = new ListNode(x);
+  this.next = newNode;
+  return
+}
 class Queue {
   constructor() {
     this.queue = null;
